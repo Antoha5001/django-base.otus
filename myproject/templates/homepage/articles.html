@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% block title%}Articles page{% endblock title %}
+{% block body %}
+    <h2>Articles page</h2>
+
+
+    {% comment %}
+    <ul class="list-group">
+  <li class="list-group-item">Dapibus ac facilisis in</li>
+
+
+  <li class="list-group-item list-group-item-primary">This is a primary list group item</li>
+  <li class="list-group-item list-group-item-secondary">This is a secondary list group item</li>
+  <li class="list-group-item list-group-item-success">This is a success list group item</li>
+  <li class="list-group-item list-group-item-danger">This is a danger list group item</li>
+  <li class="list-group-item list-group-item-warning">This is a warning list group item</li>
+  <li class="list-group-item list-group-item-info">This is a info list group item</li>
+  <li class="list-group-item list-group-item-light">This is a light list group item</li>
+  <li class="list-group-item list-group-item-dark">This is a dark list group item</li>
+</ul>
+    {% endcomment %}
+<ul class="list-group">
+    {% for article in articles %}
+
+        {% if article == 1 %}
+        <h2>This article {{ article }} from if</h2>
+        {% else %}
+    {% cycle title1 title2 as title silent %}
+<li class="list-group-item {% cycle '' 'list-group-item-secondary' 'list-group-item-danger'%}">Article #{{ article }} {{ title|safe }}</li>
+        {% endif %}
+        {% empty %}
+        <h3>Sorry no articles</h3>
+    {% endfor %}
+{% cycle 'list-group-item-light' 'list-group-item-dark' as list_class silent %}
+<li class="list-group-item {{ list_class }}">This is a light list group item</li>
+  <li class="list-group-item {{ list_class }}">This is a dark list group item</li>
+{% cycle list_class %}
+<li class="list-group-item {{ list_class }}">This is a light list group item</li>
+  <li class="list-group-item {{ list_class }}">This is a dark list group item</li>
+</ul>
+    {% autoescape off %}
+<p>{% firstof title0 title1 title2 %}</p>
+    {% endautoescape %}
+{% endblock body %}
