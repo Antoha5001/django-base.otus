@@ -41,6 +41,7 @@
     {% autoescape off %}
 <p>{% firstof title0 title1 title2 %}</p>
     {% endautoescape %}
+
 <p>{{myclass.data.datakey}}</p>
-<p>{{myclass.list.2}}</p>
+<p>{{myclass.list|length}}</p>
 {% endblock body %}
