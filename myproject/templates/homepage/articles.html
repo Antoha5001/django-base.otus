@@ -42,7 +42,12 @@
 <p>{% firstof title0 title1 title2 %}</p>
     {% endautoescape %}
 
-<p>{{myclass.data.datakey}}</p>
+<p>{{myclass.data.datakey|capfirst}}</p>
+    {% if articles|length > 5 %}
+        <h3>{{ articles|length }} &gt; 5</h3>
+        {% else %}
+        <h3>{{ articles|length }} &lt; 5</h3>
+    {% endif %}
 <p>{{myclass.list|length}}</p>
 
     {% for date in dates_my %}
@@ -56,5 +61,9 @@
         {% endifchanged %}
         {{ date|date:'TIME_FORMAT' }}
     {% endfor %}
+
+    <p>{% now 'DATE' %}</p>
+    <p>{{ today }}</p>
+    <p>{{ today|date:'SHORT_DATETIME_FORMAT' }}</p>
 
 {% endblock body %}

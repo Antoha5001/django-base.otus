@@ -4,6 +4,7 @@ from django.views.generic import TemplateView
 
 from django.shortcuts import render
 from django.views.decorators.http import require_http_methods
+from datetime import datetime
 from django.http import HttpResponse
 
 def today(count=20):
@@ -47,11 +48,9 @@ class ArticleView(TemplateView):
         return response
 
 
-def article_view(request):
-    pass
-
 def article_view_year(request, year):
     return HttpResponse(f'<h1>{year}</h1>')
+
 
 class MyClass():
     foo = "foooooo"
