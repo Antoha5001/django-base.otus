@@ -1,7 +1,7 @@
 from django.urls import path, register_converter
 from django.views.generic.base import TemplateView
 
-from .views import article_view, article_view_year, HomeView, ArticleView
+from .views import article_view_year, HomeView, ArticleView
 
 app_name = "homepage"
 
