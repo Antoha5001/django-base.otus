@@ -44,4 +44,17 @@
 
 <p>{{myclass.data.datakey}}</p>
 <p>{{myclass.list|length}}</p>
+
+    {% for date in dates_my %}
+        {% ifchanged date.month %}
+        <h3>{{ date|date:'F' }}</h3>
+        {% endifchanged %}
+        {% ifchanged date.date %}
+        <h3>{{ date|date:'d-m-Y' }}</h3>
+            {% else %}
+            ;
+        {% endifchanged %}
+        {{ date|date:'TIME_FORMAT' }}
+    {% endfor %}
+
 {% endblock body %}
