@@ -1,4 +1,18 @@
 {% extends 'authors/base.html' %}
+{% load email_domain %}
+{% load sharpnes_joke %}
+
 
 {% block body %}
+    <p>{% joke %}</p>
+    <p>{% joke %}</p>
+    <p>{% joke 0 %}</p>
+    <p>{% joke 1 %}</p>
+    <p>{% joke 3 %}</p>
+
+        <ul class="list-group">
+    {% for author in authors %}
+        <li class="list-group-item">{{ author.first_name }} {{ author.last_name }} {{ author.email|domain }}</li>
+    {% endfor %}
+        </ul>
 {% endblock %}

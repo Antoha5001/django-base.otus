@@ -1,7 +1,10 @@
-from django.shortcuts import render
-from django.views.generic.base import TemplateView
+from django.views.generic import TemplateView, ListView
 
-class IndexPage(TemplateView):
+from .models import Author
+
+class IndexPage(ListView):
+    model = Author
     template_name = 'authors/index.html'
+    context_object_name = 'authors'
 
 # Create your views here.
