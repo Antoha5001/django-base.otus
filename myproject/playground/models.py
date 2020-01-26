@@ -1,4 +1,6 @@
 from django.db import models
+from django.db.models.signals import post_save
+
 
 class StudentInformation(models.Model):
 
@@ -9,6 +11,7 @@ class StudentInformation(models.Model):
 
     def __str__(self):
         return f"{self.firsr_name} {self.last_name}"
+
 
 class Student(models.Model):
 
@@ -22,18 +25,33 @@ class Student(models.Model):
     def __str__(self):
         return f'{self.first_name} {self.last_name}'
 
+
 class StudentInfo(models.Model):
 
-    pass_id = models.CharField(max_length=10, unique=True)
-    email = models.EmailField()
+    pass_id = models.CharField(max_length=10, unique=True, null=True)
+    email = models.EmailField(unique=True)
     student = models.OneToOneField(
         Student,
         on_delete=models.CASCADE,
         primary_key=True,
         related_name='info'
     )
+
     def __str__(self):
         return f'{self.pass_id}'
+
+
+def new_student_created(instance, created, **kwargs):
+    DOMEN = 'playground.org'
+    if not created:
+        return
+    count = Student.objects.filter(first_name=instance.first_name).count()
+    email = f'{instance.first_name}{count}@{DOMEN}'.lower()
+    StudentInfo.objects.create(email=email, student=instance)
+
+
+post_save.connect(new_student_created, Student)
+
 
 class Publisher(models.Model):
     first_name = models.CharField(max_length=50)
@@ -42,9 +60,10 @@ class Publisher(models.Model):
     def __str__(self):
         return f'Publisher: {self.first_name} {self.last_name}'
 
+
 class Articles(models.Model):
     title = models.CharField(max_length=250)
-    #body
+    # body
     date = models.DateField(auto_now=False)
     publisher = models.ForeignKey(
         Publisher,
@@ -53,6 +72,7 @@ class Articles(models.Model):
 
     def __str__(self):
         return f'{self.title}'
+
 
 class Category(models.Model):
 
@@ -64,6 +84,7 @@ class Category(models.Model):
 
     def __str__(self):
         return f'{self.label}'
+
 
 class Shop(models.Model):
 

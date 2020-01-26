@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+
+{% block body %}
+    <h1>Hello player</h1>
+    <p>{{ articles }}</p>
+    {% for article in articles %}
+        <p>{{ article.publisher.first_name }} 1</p>
+    {% endfor %}
+{% endblock %}

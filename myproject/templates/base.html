@@ -38,12 +38,13 @@
         </div>
     </nav>
 
-    <h1>Hello, world!</h1>
+{#    <h1>Hello, world!</h1>#}
 
     {% block body %}
     {% endblock body %}
     <a href="{% url "homepage:index" %}">Index</a>
     <a href="{% url "homepage:articles" %}">Articles</a>
+    <a href="{% url "playground:playground" %}">Playground</a>
 </div>
 
 <!-- Optional JavaScript -->
